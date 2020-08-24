@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    width: 80%;
+    padding-top: 1%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+#header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.header-menu{
+    width: 58%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.auth-button{
+    display: inline-block; /* Строчно-блочный элемент */
+    background: #348bb2; /* Серый цвет фона */
+    color: black; /* Белый цвет текста */
+    padding: 0.4rem 1.5rem; /* Поля вокруг текста */
+    text-decoration: none; /* Убираем подчёркивание */
+    border-radius: 3px; /* Скругляем уголки */
+
+}
+
+
+
+#footer{
+    border-radius: 30px 30px 0 0;
+    background-color: #3482ab;
+    margin-top: auto;
+}
+
+#footer-menu {
+    padding: 2%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.footer-menu-element a{
+    color: black;
+}
+
+
+
+
+

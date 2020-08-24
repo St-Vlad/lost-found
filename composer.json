@@ -1,0 +1,19 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Core\\": "core/",
+      "Project\\Controllers\\": "project/controllers/",
+      "Project\\Models\\": "project/models/",
+      "Project\\Cleaners\\": "project/form_cleaners/"
+    },
+    "classmap": [
+      "core/",
+      "project/controllers/",
+      "project/models/",
+      "project/form_cleaners"
+    ]
+  },
+  "require": {
+    "ext-pdo": "*"
+  }
+}
