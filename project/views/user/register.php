@@ -31,6 +31,7 @@ else:
         <label for="terms-agree">Реєструючись, ви автоматично погоджуєтеся з умовами <a href="#">політики конфіденційності</a>
                 даного ресурсу.
         </label>
+
         <input name="terms-agree" type="checkbox" required>
         <button name="submit" type="submit" class="registerbtn">Зареєстуватися</button>
     </div>
