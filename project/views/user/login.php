@@ -1,16 +1,13 @@
 <?php
     if (isset($_SESSION['user_id'])):
-?>
-<p>Ви вже авторизовані на сайті</p>
-<?php
-    header("Location: /");
+        header("Location: /");
     else:
 ?>
 <form method="post" action="<?php echo "/user/login";?>">
     <div class="container">
         <h1>Увійти</h1>
         <?php
-        if (is_array($errors)){
+        if (!empty($errors)){
             foreach ($errors as $error){
                 echo $error."<br />";
             }

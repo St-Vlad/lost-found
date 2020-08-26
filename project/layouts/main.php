@@ -20,8 +20,8 @@
                         Зробити пост
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="#">Заявити про втрату</a>
-                        <a class="dropdown-item" href="#">Заявити про знахідку</a>
+                        <a class="dropdown-item" href="/post/loss">Заявити про втрату</a>
+                        <a class="dropdown-item" href="/post/find">Заявити про знахідку</a>
                     </div>
                 </div>
 

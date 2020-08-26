@@ -27,4 +27,10 @@ class Controller
     private function getRandomStr(){
         return substr( str_shuffle( 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM123456789' ), 0, 10 );
     }
+
+    protected function check_csrf() {
+        if (empty($_POST['CSRFtoken']) || $_POST['CSRFtoken'] !== $_SESSION['CSRFtoken']) {
+            die("wrong csrf token");
+        }
+    }
 }

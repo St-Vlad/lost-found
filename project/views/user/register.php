@@ -1,9 +1,9 @@
 <?php
 if (isset($_SESSION['user_id'])):
     ?>
-    <p>Ви вже авторизовані на сайті</p>
-<?php
     header("Location: /");
+<?php
+
 else:
 ?>
 <form method="post" action="<?php echo "/user/register";?>">
@@ -11,7 +11,7 @@ else:
         <h1>Зареєструватися</h1>
 
         <?php
-            if (is_array($errors)){
+            if (!empty($errors)){
                 foreach ($errors as $error){
                     echo $error."<br />";
                 }

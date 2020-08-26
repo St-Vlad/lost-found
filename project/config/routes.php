@@ -8,4 +8,7 @@ return [
     new Route('/user/logout', 'user', 'logout'),
     new Route('/user/register', 'user', 'register'),
     /*new Route('/email/register', 'user', 'register'),*/
+
+    new Route('/post/loss', 'post', 'loss'),
+    new Route('/post/find', 'post', 'find'),
 ];

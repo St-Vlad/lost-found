@@ -8,8 +8,9 @@ use Project\Models\User;
 
 class UserController extends Controller {
 
+    private $errors = [];
+
     public function login(){
-        $errors = [];
         $this->layout = "auth";
         $this->title = "Увійти";
 
@@ -18,25 +19,24 @@ class UserController extends Controller {
 
             $sanitizedFields = FormSanitizer::sanitizeFields($_POST['email'],
                                                              $_POST['password']);
-            $errors = FormValidator::validateLoginForm($sanitizedFields);
+            $this->errors = FormValidator::validateLoginForm($sanitizedFields);
 
-            if (!$errors){
+            if (!$this->errors){
                 $user = new User($sanitizedFields[0], $sanitizedFields[1]);
                 $user_id = $user->login();
 
                 if (!$user_id){
-                    $errors[] = "Неправильні дані для входу";
+                    $this->errors[] = "Неправильні дані для входу";
                 }
                 else{
                     $user->authUser($user_id);
                 }
             }
         }
-        return $this->render('user/login', ['errors' => $errors]);
+        return $this->render('user/login', ['errors' => $this->errors]);
     }
 
     public function register(){
-        $errors = [];
         $this->layout = "auth";
         $this->title = "Зареєструватися";
 
@@ -45,25 +45,19 @@ class UserController extends Controller {
             $sanitizedFields = FormSanitizer::sanitizeFields($_POST['email'],
                                                              $_POST['password'],
                                                              $_POST['password-repeat']);
-            $errors = FormValidator::validateRegistrationForm($sanitizedFields);
+            $this->errors = FormValidator::validateRegistrationForm($sanitizedFields);
 
-            if (!$errors){
+            if (!$this->errors){
                 $user = new User($sanitizedFields[0], $sanitizedFields[1]);
                 $user->register();
                 header("Location: /");
             }
         }
-        return $this->render('user/register', ['errors' => $errors]);
+        return $this->render('user/register', ['errors' => $this->errors]);
     }
 
     public function logout(){
         unset($_SESSION['user_id']);
         header("Location: /");
-    }
-
-    private function check_csrf() {
-        if (!$_POST['CSRFtoken'] || $_POST['CSRFtoken'] !== $_SESSION['CSRFtoken']) {
-            die("wrong csrf token");
-        }
     }
 }

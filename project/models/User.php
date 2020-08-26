@@ -9,6 +9,7 @@ class User extends Model
     private $email;
     private $password;
     private $salt;
+    //to do
     private $emailToken;
 
     public function __construct($email, $password)
