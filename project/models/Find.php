@@ -12,7 +12,7 @@ class Find extends Model
     private $placeOfFind;
     private $file;
 
-    public function __construct($title, $additionalInfo, $placeOfFind, $file)
+    public function __construct($title, $additionalInfo, $placeOfFind, $file = null)
     {
         parent::__construct();
         $this->title = $title;

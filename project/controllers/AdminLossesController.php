@@ -1,15 +1,15 @@
 <?php
 
+
 namespace Project\Controllers;
+
 
 use Core\Controller;
 
-class AdminController extends Controller
+class AdminLossesController extends Controller
 {
     public function index(){
         $this->layout = "admin";
-        $this->title = "Адмінка";
-
-        return $this->render('admin/index');
+        return $this->render('admin/losses');
     }
 }

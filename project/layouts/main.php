@@ -63,6 +63,20 @@
 
                     <div class="footer-menu-element">
                         <span class="feedback-trigger">Зворотній зв'язок</span>
+                        <!-- The Modal -->
+                        <div id="feedback-modal-id" class="feedback-modal">
+                            <!-- Modal content -->
+                            <div class="feedback-modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-header-text">Зворотній зв'язок</h2>
+                                    <span class="close-feedback">&times;</span>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Some text in the Modal Body</p>
+                                    <p>Some other text...</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="footer-menu-element">
@@ -77,7 +91,7 @@
 </body>
 
 <script>
-    let modal = $('#myModal');
+    let modal = $('#feedback-modal-id');
     $('.feedback-trigger').on('click', function () {
         modal.css({"display":"block"})
     });

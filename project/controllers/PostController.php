@@ -28,6 +28,10 @@ class PostController extends Controller
 
             if(!empty($_FILES['image']['tmp_name'])){
                 $this->img = file_get_contents($_FILES['image']['tmp_name']);
+                $imgType = substr($_FILES['image']['type'], 0 ,5);
+                if ($imgType !== "image"){
+                    $this->errors[] = "Файл повинен бути картинкой формату .jpeg або .png";
+                }
             }
 
             if (!$this->errors){
@@ -56,6 +60,7 @@ class PostController extends Controller
 
             if(!empty($_FILES['image']['tmp_name'])){
                 $this->img = file_get_contents($_FILES['image']['tmp_name']);
+                $this->checkFileExtension();
             }
             if (!$this->errors){
                 $find = new Find($sanitizedFields[0],
@@ -65,6 +70,18 @@ class PostController extends Controller
                 $find->addFind();
             }
         }
-        return $this->render('posts/find');
+        return $this->render('posts/find', ['errors' => $this->errors]);
+    }
+
+    private function checkFileExtension(){
+        $imgExtension = $this->getFileExtension();
+        if ($imgExtension !== "jpg" && $imgExtension !== "png"){
+            $this->errors[] = "Файл повинен бути картинкой формату .jpg або .png";
+        }
+    }
+
+    private function getFileExtension(){
+        $extension = explode('/', $_FILES['image']['type']);
+        return $extension[1];
     }
 }
