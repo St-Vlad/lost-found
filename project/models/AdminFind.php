@@ -25,7 +25,16 @@ class AdminFind extends Model
         return $result;
     }
 
-    public function delete($id){
+    public function getFindById($id)
+    {
+        $stmt = parent::$pdo->prepare("SELECT `find_id`, `user_id`, `title`, `additional_info`, `place_of_find`, 
+                                    `post_date`, `approved`, `image` FROM `finds` WHERE `finds`.`find_id` = :find_id");
+        $stmt->execute([':find_id' => $id]);
+        $result = $stmt->fetch();
+        return $result;
+    }
+
+    public function deleteFindById($id){
         $stmt = parent::$pdo->prepare("DELETE FROM `finds` WHERE `finds`.`find_id` = :find_id");
         $stmt->execute([':find_id' => $id]);
         header("Location: /admin/finds");
