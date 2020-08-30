@@ -6,6 +6,8 @@ use Core\Controller;
 use Core\form_cleaners\FormSanitizer;
 use Core\form_cleaners\FormValidator;
 use Project\Models\Find;
+use Project\Models\LogicFind;
+use Project\Models\LogicLoss;
 use Project\Models\Loss;
 
 class PostController extends Controller
@@ -13,13 +15,21 @@ class PostController extends Controller
     private $errors = [];
     private $img = NULL;
 
+    private $logicFind;
+    private $logicLoss;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function loss()
     {
         $this->title = "Форма заяви про втрату";
 
         if (isset($_POST['submit'])){
             $this->check_csrf();
-
+            $this->logicLoss = new LogicLoss();
             $sanitizedFields = FormSanitizer::sanitizeFields($_POST['title'],
                                                              $_POST['additional-info'],
                                                              $_POST['reward'],
@@ -28,10 +38,7 @@ class PostController extends Controller
 
             if(!empty($_FILES['image']['tmp_name'])){
                 $this->img = file_get_contents($_FILES['image']['tmp_name']);
-                $imgType = substr($_FILES['image']['type'], 0 ,5);
-                if ($imgType !== "image"){
-                    $this->errors[] = "Файл повинен бути картинкой формату .jpeg або .png";
-                }
+                $this->checkFileExtension();
             }
 
             if (!$this->errors){
@@ -40,7 +47,7 @@ class PostController extends Controller
                     $sanitizedFields[2],
                     $sanitizedFields[3],
                     $this->img);
-                $loss->addLoss();
+                $this->logicLoss->addLoss($loss);
             }
         }
         return $this->render('posts/loss');
@@ -52,6 +59,7 @@ class PostController extends Controller
 
         if (isset($_POST['submit'])){
             $this->check_csrf();
+            $this->logicFind = new LogicFind();
 
             $sanitizedFields = FormSanitizer::sanitizeFields($_POST['title'],
                 $_POST['additional-info'],
@@ -64,10 +72,10 @@ class PostController extends Controller
             }
             if (!$this->errors){
                 $find = new Find($sanitizedFields[0],
-                    $sanitizedFields[1],
-                    $sanitizedFields[2],
-                    $this->img);
-                $find->addFind();
+                                 $sanitizedFields[1],
+                                 $sanitizedFields[2],
+                                 $this->img);
+                $this->logicFind->addFind($find);
             }
         }
         return $this->render('posts/find', ['errors' => $this->errors]);

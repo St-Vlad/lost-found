@@ -4,11 +4,19 @@ namespace Project\Controllers;
 use Core\Controller;
 use Core\form_cleaners\FormSanitizer;
 use Core\form_cleaners\FormValidator;
+use Project\Models\LogicUser;
 use Project\Models\User;
 
 class UserController extends Controller {
 
     private $errors = [];
+    private $logicUser;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->logicUser = new LogicUser();
+    }
 
     public function login(){
         $this->layout = "auth";
@@ -23,13 +31,14 @@ class UserController extends Controller {
 
             if (!$this->errors){
                 $user = new User($sanitizedFields[0], $sanitizedFields[1]);
-                $user_id = $user->login();
+
+                $user_id = $this->userLogic->login($user);
 
                 if (!$user_id){
                     $this->errors[] = "Неправильні дані для входу";
                 }
                 else{
-                    $user->authUser($user_id);
+                    $this->userLogic->authUser($user_id);
                 }
             }
         }
@@ -49,7 +58,7 @@ class UserController extends Controller {
 
             if (!$this->errors){
                 $user = new User($sanitizedFields[0], $sanitizedFields[1]);
-                $user->register();
+                $this->userLogic->register($user);
                 header("Location: /");
             }
         }
