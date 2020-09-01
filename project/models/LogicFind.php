@@ -20,7 +20,7 @@ class LogicFind extends Model
         $obj->execute([':title' => $find->getTitle(),
                        ':additionalInfo' => $find->getAdditionalInfo(),
                        ':placeOfFind' => $find->getPlaceOfFind(),
-                       'user_id' => $find->getUserId(),
+                       ':user_id' => $find->getUserId(),
                        ':image' => $find->getImage()]);
         return true;
     }
@@ -43,7 +43,6 @@ class LogicFind extends Model
         }
         return $result;
     }
-
 
     public function getFindById($id)
     {

@@ -32,13 +32,13 @@ class UserController extends Controller {
             if (!$this->errors){
                 $user = new User($sanitizedFields[0], $sanitizedFields[1]);
 
-                $user_id = $this->userLogic->login($user);
+                $user_id = $this->logicUser->login($user);
 
                 if (!$user_id){
                     $this->errors[] = "Неправильні дані для входу";
                 }
                 else{
-                    $this->userLogic->authUser($user_id);
+                    $this->logicUser->authUser($user_id);
                 }
             }
         }
