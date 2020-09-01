@@ -3,7 +3,6 @@
 namespace Project\Controllers;
 
 use Core\Controller;
-use Project\Models\AdminFind;
 use Project\Models\LogicFind;
 
 class AdminFindsController extends Controller
@@ -25,7 +24,7 @@ class AdminFindsController extends Controller
     public function update($params){
         $this->layout = "admin";
         $item = $this->logicFind->getFindById($params['id']);
-        return $this->render('admin/updateForm', ['item' => $item]);
+        return $this->render('admin/updateFindForm', ['item' => $item]);
     }
 
     public function delete($params){

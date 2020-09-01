@@ -44,6 +44,7 @@ class LogicFind extends Model
         return $result;
     }
 
+
     public function getFindById($id)
     {
         $stmt = parent::$pdo->prepare("SELECT `find_id`, `user_id`, `title`, `additional_info`, `place_of_find`, 

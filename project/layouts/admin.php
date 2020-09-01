@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= $title?></title>
+    <link rel="stylesheet" href="<?php echo "/project/resources/css/forms/form.css";?>">
 </head>
 <body>
 <div id="header">
