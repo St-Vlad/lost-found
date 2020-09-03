@@ -39,7 +39,7 @@
                 <td contenteditable="true"><?= $item['place_of_find']?></td>
                 <td><?= $item['post_date']?></td>
                 <td contenteditable="true"><?= $item['approved']?></td>
-                <td id="image"><img width=100px src="data:image/jpeg;base64, <?= $item['image']?>" alt="немає фото"></td>
+                <td class="image"><img id="changeable-image" width=100px src="data:image/jpeg;base64, <?= $item['image']?>" alt="немає фото"></td>
                 <td><a href="/admin/finds/update/<?= $item['find_id']?>">Змінити</a> </td>
                 <td><a href="/admin/finds/delete/<?= $item['find_id']?>">Видалити</a></td>
             </tr>
